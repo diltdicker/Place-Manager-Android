@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DillTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#4c4d52</item>
+        <item name="colorPrimaryDark">#111111</item>
+        <item name="colorAccent">#fffb99</item>
+    </style>
+
 </resources>
