@@ -22,6 +22,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Currency;
 
+/**
+ * @author Dillon Dickerson
+ * Created by diltdicker on 2/4/18.
+ */
 //  Created by diltdicker on 2/4/18.
 //  Copyright © 2018 Dillon Dickerson. All rights reserved.
 //
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_add:
                 Log.d("ADD", "onOptionsItemSelected: ADD");
                 Intent viewIntent = new Intent(MainActivity.this, Add_Activity.class);
-                this.startActivity(viewIntent);
+                startActivityForResult(viewIntent, 222);
                 return true;
             case R.id.action_remove:
                 Log.d("RM", "onOptionsItemSelected: REMOVE");
@@ -176,7 +180,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("tap click", "onTap: Tapped: " + plDescList.get(places.indexOf(t.getText())).toJSON());
         viewIntent.putExtra("name", t.getText());
 
-        this.startActivity(viewIntent);
+        //this.startActivity(viewIntent);
+
+        startActivityForResult(viewIntent, 111);
     }
 
     @Override
@@ -185,6 +191,51 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ret", "onActivityResult: back");
         Log.d("ret", "onActivityResult: " + requestCode);
         switch(requestCode) {
+            case 111:{
+                String act = data.getStringExtra("action");
+                String name = data.getStringExtra("name");
+                String plDesc = data.getStringExtra("data");
+                if (act.equals("remove")){
+                    int i = places.indexOf(name);
+                    if (i == -1) {
+                        Log.d("place", name);
+                        Log.d("list", places.toString());
+                    } else {
+                        plData.removeItem(i);
+                        plDescList.remove(i);
+                    }
+
+                } else if (act.equals("edit")) {
+                    int i = places.indexOf(name);
+                    if (i == -1) {
+                        Log.d("place", name);
+                        Log.d("list", places.toString());
+                    } else {
+                        plDescList.set(i, new Place_Description(plDesc, name));
+                    }
+                }
+            }
+                break;
+
+            case 222: {
+                String act = data.getStringExtra("action");
+                if (act.equals("add")) {
+                    String plDesc = data.getStringExtra("data");
+                    String name = data.getStringExtra("name");
+                    plDescList.add(new Place_Description(plDesc, name));
+                    plData.addItem(name);
+                } else {
+
+                }
+
+                break;
+            }
+
+
+            default: {
+                Log.d("result", "code" + requestCode);
+                break;
+            }
         }
     }
 

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
+ * @author Dillon Dickerson
  * Created by diltdicker on 2/4/18.
  */
 //  Copyright © 2018 Dillon Dickerson. All rights reserved.
@@ -65,13 +66,15 @@ public class Recycle_Adapt extends RecyclerView.Adapter<Recycle_Adapt.ViewHold> 
 
     public void addItem(String var) {
         list.add(var);
-        notifyItemChanged(list.size()-1);
+        notifyItemInserted(list.size()-1);
     }
 
     public void removeItem(int i){
         Log.d("rm", "size: " + list.size());
         list.remove(i);
-        notifyItemChanged(list.size()-1);
+        Log.d("rm", "size2: " + list.size());
+        notifyItemRemoved(i);
+        Log.d("rm", "size3: " + list.size());
     }
 
     public static class ViewHold extends RecyclerView.ViewHolder {

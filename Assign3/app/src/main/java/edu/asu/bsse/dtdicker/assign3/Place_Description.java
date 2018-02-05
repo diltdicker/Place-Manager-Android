@@ -3,6 +3,7 @@ package edu.asu.bsse.dtdicker.assign3;
 import org.json.JSONObject;
 
 /**
+ * @author Dillon Dickerson
  * Created by diltdicker on 2/4/18.
  */
 //  Copyright © 2018 Dillon Dickerson. All rights reserved.
@@ -38,6 +39,19 @@ public class Place_Description {
     private String image;
     private String description;
     private String category;
+
+    public Place_Description(String place) {
+        addTitle = "";
+        addStreet = "";
+        elevation = "";
+        latitude = "";
+        longitude = "";
+        name = "";
+        image = "";
+        description = "";
+        category = "";
+        this.place = place;
+    }
 
     public Place_Description(String json, String place) {
 
