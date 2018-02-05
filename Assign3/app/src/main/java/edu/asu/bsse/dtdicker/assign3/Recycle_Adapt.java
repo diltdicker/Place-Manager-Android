@@ -1,0 +1,86 @@
+package edu.asu.bsse.dtdicker.assign3;
+
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+/**
+ * Created by diltdicker on 2/4/18.
+ */
+//  Copyright © 2018 Dillon Dickerson. All rights reserved.
+//
+//---------------------------------------------------------------------------
+//    Copyright (C) 2018 Dillon Dickerson
+//	  email: diltdicker@gmail.com
+//
+//    This program is free software: you can redistribute it and/or modify
+//    it under the terms of the GNU General Public License as published by
+//    the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+//
+//    This program is distributed in the hope that it will be useful,
+//    but WITHOUT ANY WARRANTY; without even the implied warranty of
+//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License
+//    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+//---------------------------------------------------------------------------
+
+public class Recycle_Adapt extends RecyclerView.Adapter<Recycle_Adapt.ViewHold> {
+
+    private LayoutInflater layInflate;
+    //private String[] list = {"test1", "test2", "test5", "test6"};
+    private ArrayList<String> list;
+
+    public Recycle_Adapt() {
+        list.clear();
+    }
+
+    public Recycle_Adapt(ArrayList<String> list) {
+        this.list = list;
+    }
+
+    @Override
+    public ViewHold onCreateViewHolder(ViewGroup parent, int viewType) {
+        TextView v = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.text_view, parent, false);
+        ViewHold vh = new ViewHold(v);
+        return vh;
+
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHold holder, int position) {
+        holder.plDataTextView.setText(list.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    public void addItem(String var) {
+        list.add(var);
+        notifyItemChanged(list.size()-1);
+    }
+
+    public void removeItem(int i){
+        Log.d("rm", "size: " + list.size());
+        list.remove(i);
+        notifyItemChanged(list.size()-1);
+    }
+
+    public static class ViewHold extends RecyclerView.ViewHolder {
+
+        public TextView plDataTextView;
+
+        public ViewHold(TextView itemView) {
+            super(itemView);
+            plDataTextView = (TextView) itemView;
+        }
+    }
+}
